@@ -7,38 +7,29 @@ template<typename T, int size>
 class TStack {
   // добавьте код стека
 private:
-    const int Ksize = size;
-    T arr[100];
+    T data[100];
     int top;
 
  public:
-    TStack() : top(0) {}
-    T get() {
-        if (!isEmpty()) {
-            return arr[top - 1];
-        } else {
-            throw std::string("Empty");
-        }
+    TStack(): top(-1) {}
+    void push(T val) {
+      if (!isOverflow())
+        data[++top] = val;
+      else
+        throw std::string("Full");
     }
-    bool isEmpty() {
-        return top == 0;
-    }
-    bool isFull() {
-        return top == size - 1;
-    }
+    T see() const { return data[top]; }
     T pop() {
-        if (top > 0) {
-            return arr[--top];
-        } else {
-            throw std::string("Empty");
-        }
+      if (isEmpty())
+        throw std::string("Empty");
+      else
+        return data[top--];
     }
-    void push(const T& item) {
-        if (top <= size - 1) {
-            arr[top++] = item;
-        } else {
-            throw std::string("Full");
-        }
+    bool isOverflow() const {
+      return top == size - 1;
+    }
+    bool isEmpty() const {
+      return top == -1;
     }
 };
 
