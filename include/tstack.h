@@ -5,31 +5,39 @@
 
 template<typename T, int size>
 class TStack {
-  // добавьте код стека
 private:
+    const int Ksize = size;
     T data[100];
     int top;
 
  public:
-    TStack(): top(-1) {}
-    void push(T val) {
-      if (!isOverflow())
-        data[++top] = val;
-      else
-        throw std::string("Full");
+    TStack() : top(0) {}
+    T get() {
+        if (!isEmpty()) {
+            return data[top - 1];
+        } else {
+            throw std::string("Empty");
+        }
     }
-    T see() const { return data[top]; }
+    bool isEmpty() {
+        return top == 0;
+    }
+    bool isFull() {
+        return top == size - 1;
+    }
     T pop() {
-      if (isEmpty())
-        throw std::string("Empty");
-      else
-        return data[top--];
+        if (top > 0) {
+            return data[--top];
+        } else {
+            throw std::string("Empty");
+        }
     }
-    bool isOverflow() const {
-      return top == size - 1;
-    }
-    bool isEmpty() const {
-      return top == -1;
+    void push(const T& item) {
+        if (top <= size - 1) {
+            data[top++] = item;
+        } else {
+            throw std::string("Full");
+        }
     }
 };
 
