@@ -5,7 +5,7 @@
 
 template<typename T, int size>
 class TStack {
-private:
+ private:
     const int Ksize = size;
     T data[100];
     int top;
